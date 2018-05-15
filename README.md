@@ -41,6 +41,7 @@ $ systemctl disable [servicename]
 $ systemctl daemon-reload
 $ systemctl reset-failed
 ($ systemctl | grep [servicename] #verify service has been removed)
+```
 
 ---
 
