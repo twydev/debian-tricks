@@ -1,0 +1,15 @@
+[Unit]
+Description=Start VNC Server on boot
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User=yourusername
+PAMName=login
+PIDFile=/home/pi/.vnc/vnc-server:1.pid #PLS VERIFY THIS MATCHES YOUR PID
+ExecStartPre=-/usr/bin/vncserver -kill :1 > /dev/null 2>&1
+ExecStart=/usr/bin/vncserver -geometry 1920x1080 :1
+ExecStop=/usr/bin/vncserver -kill :1
+
+[Install]
+WantedBy=multi-user.target
