@@ -63,3 +63,17 @@ $ source ~/.bashrc
 ```
 $ up
 ```
+
+---
+
+## Set Octave to use GNU plot (to solve the no plot display issue)
+1. Locate the Octave config file.
+```
+$ cd /usr/share/octave/<version.number>/m/startup
+$ sudo nano octaverc
+```
+2. Paste the following command at the top of the config script to force the usage of GNU plot:
+```
+graphics_toolkit("gnuplot")
+```
+3. Save the file and reload Octave. Try it with some simple plots, the figures should be showing now.
