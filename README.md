@@ -77,3 +77,37 @@ $ sudo nano octaverc
 graphics_toolkit("gnuplot")
 ```
 3. Save the file and reload Octave. Try it with some simple plots, the figures should be showing now.
+
+---
+
+## Check Disk Space and Delete files
+
+A few of the servers in my HDP frequently run into problems, due to a full disk. While I have not figure out a solution to prevent this, the fastest remedy is to delete teh files that are taking up the most disk space: the log files.
+
+1. SSH into the problematic server. Find out how much space you have in the current drive.
+```
+#check space in current drive
+$ df -h .
+#check space for all drives
+$ df -h
+```
+2. Go to the root directory of the drive. Check space consumption for each child directory.
+```
+#print in human readable form, depth 1.
+$ du -h --max-depth=1
+#for easier inspection, egrep the output to filter for directories taking up space in Gigabytes, sorted in descending order.
+$ du -h --max-depth=1 | egrep '^[0-9.]+G' | sort -r
+```
+3. Recursively perform this analysis on child directories to find the culprit that is taking up the most space. In my case, the hive logs in /var/log/hive are causing the problems.
+```
+#show file size in current directory
+$ du -sh -- * 
+#similar to previous steps, identify teh biggest problematic file
+$ du -sh -- * | egrep '^[0-9.]+G' | sort -r
+```
+4. use find command with regex to filter for files to be deleted.
+```
+$ find -tyoe f -name 'hiveserver2.log.2019-*' | sort
+#confirm and delete the files
+$ find -tyoe f -name 'hiveserver2.log.2019-*' -delete
+```
