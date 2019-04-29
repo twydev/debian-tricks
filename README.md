@@ -107,7 +107,7 @@ $ du -sh -- * | egrep '^[0-9.]+G' | sort -r
 ```
 4. use find command with regex to filter for files to be deleted.
 ```
-$ find -tyoe f -name 'hiveserver2.log.2019-*' | sort
+$ find -type f -name 'hiveserver2.log.2019-*' | sort
 #confirm and delete the files
-$ find -tyoe f -name 'hiveserver2.log.2019-*' -delete
+$ find -type f -name 'hiveserver2.log.2019-*' -delete
 ```
