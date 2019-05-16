@@ -111,3 +111,15 @@ $ find -type f -name 'hiveserver2.log.2019-*' | sort
 #confirm and delete the files
 $ find -type f -name 'hiveserver2.log.2019-*' -delete
 ```
+
+---
+
+## WINDOWS - Verifying integrity of downloaded files
+
+Very often, you would want to download free stuff from websites you have not visited before and will likely not visit again ever. The best practices is to verify the file integrity using the cryptographic signatures provided alongside the file download. This can easily be done on Linux machines using GPG, but on windows, you will need the help of PowerShell.
+
+```
+PS C:\working\dir> Get-FileHash name-of-file [-Algorithm MD5]
+```
+
+SHA 256 is the default algorithm for hashing of the file. Simply match the output hash value with the signature to verify the file has not been tampered with.
